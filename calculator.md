@@ -406,7 +406,7 @@ Når regneoperasjon er utført, så skriver vi ut resultatet.
 - [Skrive ut med flere variable](https://github.com/orsnes-privatskole/orsnes-privatskole.github.io#skriv-ut-med-flere-variable)
 
 <details>
-<summary></summary>
+<summary>Løsningsforslag - Kalkulator Deluxe - Del C</summary>
 
 ```python
 import time
