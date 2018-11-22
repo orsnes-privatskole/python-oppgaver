@@ -4,7 +4,7 @@ Vi bygger videre på det vi lærte i [Tilfeldig kunst oppgaven](https://github.c
 
 Koden vår begynner nå å bli mer kompleks, og vi vil derfor ta i bruk klasser og objekter som gjør det lettere å organisere koden. Det gjør det også mulig å basere oss på kode som allerede finnes. For eksempel i [Python Arcade](http://arcade.academy) så finnes det en *klasse* for å håndtere et *vindu* som har kontroll på tegning av grafikk som stadig oppdateres, samt håndtere bruker-input, f.eks at brukere trykker på en tast på tastaturet eller beveger muspekeren.
 
-Dette kan vi dra nytte av ved å lage vår egen klasse som *arver* fra Python Arcade sin [arcade.application.Window](http://arcade.academy/arcade.html?#module-arcade.application). At den arver betyr at vi får med alt som finnes i den klassen fra før, og at vi i tilleg kan lage vår egen kode for hva som skal skje når en tast trykkes f.eks.
+Dette kan vi dra nytte av ved å lage vår egen klasse som *arver* fra Python Arcade sin [arcade.application.Window](http://arcade.academy/arcade.html?#module-arcade.application). At den arver betyr at vi får med alt som finnes i den klassen fra før, og at vi i tillegg kan lage vår egen kode for hva som skal skje når en tast trykkes f.eks.
 
 ## Del A - Basiskode
 
@@ -54,7 +54,7 @@ if __name__ == "__main__":
 
 Nå som vi har basiskoden på plass, vil vi lage et nytt objekt som skal bevege seg. Objektet skal holde rede på egen posisjon og fart, samt være istand til å "tegne seg selv".
 
-Vi kalle klassen vår for ``Shape``, og legger følgende kode til på over ``MyWindow`` klassen:
+Vi kaller klassen vår for ``Shape``, og legger følgende kode til over ``MyWindow`` klassen:
 
 ```python
 class Shape:
