@@ -50,6 +50,8 @@ if __name__ == "__main__":
 
 ## Del B - Bevegelig objekt
 
+![moving-object](gfx/animation-part-b.png)
+
 Nå som vi har basiskoden på plass, vil vi lage et nytt objekt som skal bevege seg. Objektet skal holde rede på egen posisjon og fart, samt være istand til å "tegne seg selv".
 
 Vi kalle klassen vår for ``Shape``, og legger følgende kode til på over ``MyWindow`` klassen:
