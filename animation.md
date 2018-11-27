@@ -181,7 +181,7 @@ Hvis vi sjekker i ``update()`` funksjonen om høyre side av objektet er lik elle
 
 På samme måte kan vi sjekke for om venstre side av objektet er lik eller mindre enn 0, da vet vi at objektet har nådd venstre kant.
 
-Siden posisjonen vi har i ``x`` og ``y`` i ``Shape`` representerer senter av objektet, så kan vi lage noen enkle funksjoner for posisjon til høyre og venstre kant er. Det gjør koden lettere å lese og arbeide med senere. Først lag en variabel i ``__init__()`` som holder rede på størrelsen (radius):
+Siden posisjonen vi har i ``x`` og ``y`` i ``Shape`` representerer senter av objektet, så kan vi lage noen enkle funksjoner for hvor posisjon til høyre og venstre kant er. Det gjør koden lettere å lese og arbeide med senere. Først lag en variabel i ``__init__()`` som holder rede på størrelsen (radius):
 
 ```python
 # Object position
@@ -216,13 +216,6 @@ if self.right() >= SCREEN_WIDTH and self.vel_x > 0:
 # Check if we hit the left wall and still moving left, then flip direction
 elif self.left() <= 0 and self.vel_x < 0:
     self.vel_x *= -1
-```
-
-Det er nå viktig at vi plasserer objektet slik at hele er inne på vinduet, så vi endrer koden i ``MyWindow`` der vi oppretter objektet slik:
-
-```python
-# Create a shape object at 0 (left) x position, and centre of height
-self.shape = Shape(50, SCREEN_HEIGHT // 2)
 ```
 
 Når vi nå kjører koden vil objektet bevege seg til høyre, snu og komme tilbake til venstre, så til høyre...
@@ -344,7 +337,7 @@ alpha = random.randint(100, 200)
 self.color = (red, green, blue, alpha)
 ```
 
-Her lar vi rød få en større verdi enn de andre farge-kanalene, samt at alpha-kanalen (gjennomsiktighet) alltid sørger for litt gjennomsiktighet, men aldre helt gjennomsiktig.
+Her lar vi rød få en større verdi enn de andre farge-kanalene, samt at alpha-kanalen (gjennomsiktighet) alltid sørger for litt gjennomsiktighet, men aldri helt gjennomsiktig.
 
 I tillegg må vi endre i ``draw()`` funksjonen så vi bruker den nye ``self.color`` variabelen:
 
