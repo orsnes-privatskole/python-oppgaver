@@ -12,66 +12,30 @@ class RainDrop:
         self.x = x
         self.y = y
 
-        self.prev_x = x
-        self.prev_y = y
-
         # Object velocity (speed)
         self.vel_x = 0
-        self.vel_y = 0
+        self.vel_y = -100
 
-        # Drop size
-        self.size = random.randint(1, 2)
-
-        # Color
-        self.drop_color = (120, 120, 140, 230)
-        self.trail_color = (100, 100, 120, 100)
-
-    def update(self, delta_time, wind, speed):
-        self.vel_x = wind
-        self.vel_y = speed
-
-        # Store previous position
-        self.prev_x = self.x
-        self.prev_y = self.y
-
+    def update(self, delta_time):
         # Calculate new position based on velocity
         self.x += self.vel_x * delta_time
         self.y += self.vel_y * delta_time
 
-        # If reached bottom, reset position
+        # If reached bottom, move back to top at random X
         if self.y < 0:
-            self.reset()
-
-        # If drifted out of the screen because of wind, reset position
-        if self.x > SCREEN_WIDTH or self.x < 0:
-            self.reset()
-
-    # Move to top of screen at random x position
-    def reset(self):
-        self.y = random.randint(SCREEN_HEIGHT / 2, SCREEN_HEIGHT + 50)
-        self.x = random.randint(0, SCREEN_WIDTH)
-
-        # If new position, also reset the previous position
-        self.prev_x = self.x
-        self.prev_y = self.y
-
-        self.size = random.randint(1, 2)
+            self.y = SCREEN_HEIGHT
+            self.x = random.randint(0, SCREEN_WIDTH)
 
     def draw(self):
-        arcade.draw_line(self.x, self.y, self.prev_x, self.prev_y, self.trail_color)
-        arcade.draw_point(self.x, self.y, self.drop_color, self.size)
-
+        arcade.draw_point(self.x, self.y, arcade.color.LIGHT_GRAY, 2)
 
 class MyWindow(arcade.Window):
 
     def __init__(self, width, height):
         super().__init__(width, height)
 
-        background_color = (30, 30, 60)
+        background_color = (50, 50, 60)
         arcade.set_background_color(background_color)
-
-        self.wind = 0
-        self.speed = -100  # Speed towards ground
 
         self.raindrops = []
 
@@ -93,26 +57,16 @@ class MyWindow(arcade.Window):
         for raindrop in self.raindrops:
             raindrop.draw()
         arcade.draw_text(f"Number of raindrops: {len(self.raindrops)}", 10, SCREEN_HEIGHT - 15, arcade.color.WHITE)
-        arcade.draw_text(f"Wind: {self.wind}", 10, SCREEN_HEIGHT - 30, arcade.color.WHITE)
 
     def on_update(self, delta_time):
         for raindrop in self.raindrops:
-            raindrop.update(delta_time, self.wind, self.speed)
+            raindrop.update(delta_time)
 
     def on_key_press(self, key, key_modifiers):
         if key == arcade.key.PLUS:
             self.add_raindrops(50)
         elif key == arcade.key.MINUS:
             self.remove_raindrops(50)
-        elif key == arcade.key.LEFT:
-            self.wind -= 50
-        elif key == arcade.key.RIGHT:
-            self.wind += 50
-        elif key == arcade.key.UP:
-            if self.speed < -50:
-                self.speed += 50
-        elif key == arcade.key.DOWN:
-            self.speed -= 50
 
 
 def main():

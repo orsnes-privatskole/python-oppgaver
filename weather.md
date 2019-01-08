@@ -74,8 +74,7 @@ def add_raindrops(self, number_of_drops):
     # Add code for adding raindrops here
 
 def remove_raindrops(self, number_of_drops):
-    # Add code for removing raindrops here
-    
+    # Add code for removing raindrops here  
 ```
 
 Idé: Legg til en tekst som forteller hvor mange regndråper som er på skjermen.
@@ -87,3 +86,20 @@ Regnet faller jo sjelden rett ned (i hvert fall i Nord-Norge!). Legg til vind so
 Tips: Legg til en tekst på skjermen (eller en vind-pil) som viser hva slags vind som er i øyeblikket.
 
 Tips: Vi bruker variabelen ``val_y`` for å få regnet til å bevege seg mot bakken (tyngdekraft). Vind kan legges inn i variabelen ``val_x`` som vil påvirke regnets bevegelse i x-aksen.
+
+## Del F - Legg til "motion blur"
+
+En måte å få bedre følelse med farten i noe som beveger seg, er å tegne et strek fra nåværende posisjon tilbake til forrige posisjon for hver frame. For å få det til kan vi legge til to variable i regndråpe objektet for forrige x og forrige y posision. I tegn funskjonen legger vi til tegning av en linje fra x,y til forrige x,y i tillegg til selve dråpen.
+
+Denne effekten blir enda mer tydelig om vi lager variabel hastighet nedover i tillegg til vind, det kan vi for eksempel styre med pil-tastene opp og ned for å senke og øke hastigheten på hvordan regnet faller.
+
+Eksempel:
+```python
+def draw(self):
+    arcade.draw_line(self.x, self.y, self.prev_x, self.prev_y, (80, 80, 80, 160))
+    arcade.draw_point(self.x, self.y, arcade.color.LIGHT_GRAY, 2)
+```
+
+## Del G - La dråpene ha litt ulik størrelse og hastighet basert på størrelse
+
+Om vi lar størrelsen være tilfeldig, og baserer hastigheten mot jorden være høyere for dråper som er større, vil regnet kanskje se enda mer realistisk ut?
