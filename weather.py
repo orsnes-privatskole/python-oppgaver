@@ -7,6 +7,9 @@ SCREEN_HEIGHT = 600
 SNOW_MAX_SIZE = 6
 SNOW_MIN_SIZE = 3
 
+RAIN_MAX_SIZE = 4
+RAIN_MIN_SIZE = 2
+
 
 class SnowFlake:
 
@@ -14,12 +17,17 @@ class SnowFlake:
         self.x = x
         self.y = y
 
+        self.prev_x = x
+        self.prev_y = y
+
         self.vel_x = 0
         self.vel_y = 0
 
         self.size = random.randint(SNOW_MIN_SIZE, SNOW_MAX_SIZE)
 
+        # Color
         self.color = (220, 220, 220, 200)
+        self.trail_color = (220, 220, 220, 100)
 
         # Wiggle component of sideways movement
         self.wiggle = 0
@@ -41,6 +49,10 @@ class SnowFlake:
         # Apply gravity for movement down
         self.vel_y = speed
 
+        # Store previous position before calculating next
+        self.prev_x = self.x
+        self.prev_y = self.y
+
         # Reset the wiggle movement to make it random after a set n umber of frames
         self.wiggle_count += 1
         if self.wiggle_count > self.wiggle_reset_limit:
@@ -54,9 +66,13 @@ class SnowFlake:
         if self.y < 0:
             self.reset()
 
-        # If drifted out of the screen because of wind, reset position
-        if self.x > SCREEN_WIDTH or self.x < 0:
-            self.reset()
+        # If drifted out of the screen because of wind, move to other side of window
+        if self.x > SCREEN_WIDTH:
+            self.x = 0
+            self.reset_previous()
+        if self.x < 0:
+            self.x = SCREEN_WIDTH
+            self.reset_previous()
 
     # Move to top of screen at random x position
     def reset(self):
@@ -65,7 +81,16 @@ class SnowFlake:
 
         self.size = random.randint(SNOW_MIN_SIZE, SNOW_MAX_SIZE)
 
+        # If new position, also reset the previous position
+        self.reset_previous()
+
+    def reset_previous(self):
+        self.prev_x = self.x
+        self.prev_y = self.y
+
     def draw(self):
+        arcade.draw_point(self.prev_x, self.prev_y, self.trail_color, 1)
+        arcade.draw_line(self.prev_x, self.prev_y, self.x, self.y, self.trail_color, self.size)
         arcade.draw_circle_filled(self.x, self.y, self.size, self.color)
 
 
@@ -84,7 +109,7 @@ class RainDrop:
         self.vel_y = 0
 
         # Drop size
-        self.size = random.randint(1, 2)
+        self.size = random.randint(RAIN_MIN_SIZE, RAIN_MAX_SIZE)
 
         # Color
         self.drop_color = (120, 120, 140, 230)
@@ -106,20 +131,28 @@ class RainDrop:
         if self.y < 0:
             self.reset()
 
-        # If drifted out of the screen because of wind, reset position
-        if self.x > SCREEN_WIDTH or self.x < 0:
-            self.reset()
+        # If drifted out of the screen because of wind, move to other side of window
+        if self.x > SCREEN_WIDTH:
+            self.x = 0
+            self.reset_previous()
+
+        if self.x < 0:
+            self.x = SCREEN_WIDTH
+            self.reset_previous()
 
     # Move to top of screen at random x position
     def reset(self):
         self.x = random.randint(0, SCREEN_WIDTH)
-        self.y = random.randint(SCREEN_HEIGHT / 2, SCREEN_HEIGHT + 50)
+        self.y = random.randint(SCREEN_HEIGHT, SCREEN_HEIGHT + 50)
 
         # If new position, also reset the previous position
+        self.reset_previous()
+
+        self.size = random.randint(RAIN_MIN_SIZE, RAIN_MAX_SIZE)
+
+    def reset_previous(self):
         self.prev_x = self.x
         self.prev_y = self.y
-
-        self.size = random.randint(1, 2)
 
     def draw(self):
         arcade.draw_line(self.x, self.y, self.prev_x, self.prev_y, self.trail_color)
