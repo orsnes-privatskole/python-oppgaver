@@ -85,7 +85,7 @@ Regnet faller jo sjelden rett ned (i hvert fall i Nord-Norge!). Legg til vind so
 
 Tips: Legg til en tekst på skjermen (eller en vind-pil) som viser hva slags vind som er i øyeblikket.
 
-Tips: Vi bruker variabelen ``val_y`` for å få regnet til å bevege seg mot bakken (tyngdekraft). Vind kan legges inn i variabelen ``val_x`` som vil påvirke regnets bevegelse i x-aksen.
+Tips: Vi bruker variabelen ``vel_y`` for å få regnet til å bevege seg mot bakken (tyngdekraft). Vind kan legges inn i variabelen ``vel_x`` som vil påvirke regnets bevegelse i x-aksen.
 
 ## Del F - Legg til "motion blur"
 
