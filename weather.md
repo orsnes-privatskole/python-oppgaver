@@ -89,6 +89,8 @@ Tips: Vi bruker variabelen ``val_y`` for å få regnet til å bevege seg mot bak
 
 ## Del F - Legg til "motion blur"
 
+![rain](gfx/rain.png)
+
 En måte å få bedre følelse med farten i noe som beveger seg, er å tegne et strek fra nåværende posisjon tilbake til forrige posisjon for hver frame. For å få det til kan vi legge til to variable i regndråpe objektet for forrige x og forrige y posision. I tegn funskjonen legger vi til tegning av en linje fra x,y til forrige x,y i tillegg til selve dråpen.
 
 Denne effekten blir enda mer tydelig om vi lager variabel hastighet nedover i tillegg til vind, det kan vi for eksempel styre med pil-tastene opp og ned for å senke og øke hastigheten på hvordan regnet faller.
@@ -103,3 +105,10 @@ def draw(self):
 ## Del G - La dråpene ha litt ulik størrelse og hastighet basert på størrelse
 
 Om vi lar størrelsen være tilfeldig, og baserer hastigheten mot jorden være høyere for dråper som er større, vil regnet kanskje se enda mer realistisk ut?
+
+## Del H - Legg til snø
+
+![snow](gfx/snow.png)
+
+Ved å lage en ny klasse i tillegg til ``Raindrop`` så kan vi bygge inn lignende, men annerledes animasjon om det er snø isteden, f.eks. at et snøflak svinger fra side til side mens det faller mot bakken.
+
